@@ -1,17 +1,17 @@
 $(function() {
 
 	console.log("loaded");
+	var gridWidth = 3;
+	var gridSize = Math.pow(gridWidth, 2);
+	var blankSquares = [];
 	run();
 
 	function run() {
-
-		var gridWidth = 3;
-		var gridSize = Math.pow(gridWidth, 2);
-		var blankSquares = [];
 		createGrid();
 		generateMines();
 		clickSquare();
-		console.log(blankSquares);
+		console.log();
+	}
 
 	// create 3x3 grid
 		// create grid based on difficulty selected
@@ -26,13 +26,10 @@ $(function() {
 			$("li").css({"width": sideLength, "height": sideLength});
 		}
 
-	// on click print a number
-
-	// randomly generate 2 mine locations (0-8)
-		// generate number of mines based on difficulty (0-(n-1))
+	// set mines
 
 		function generateMines(){
-			mineNumbers = generateMineNumbers();
+			mineNumbers = generateMineNumbers(gridWidth);
 			console.log(mineNumbers);
 
 			$("li").each(function(index, li){
@@ -40,7 +37,7 @@ $(function() {
 				if (mineNumbers.indexOf(id) != -1) {
 					$(li).addClass("mine");
 				}
-				if ($(li).hasClass("mine")==false){
+				if ($(li).hasClass("mine") == false){
 					blankSquares.push(id);
 				}
 			});
@@ -50,6 +47,9 @@ $(function() {
 			});
 
 		}
+
+	// randomly generate 2 mine locations (0-8)
+		// generate number of mines based on difficulty (0-(n-1))
 
 		function generateMineNumbers(){
 			var mineNumbers = []
@@ -70,19 +70,35 @@ $(function() {
 			return mineNumbers;
 		}
 
+			// on click print a number
+
 		function clickSquare(){
 			$("li").click(function() {
 				if ($(this).hasClass("mine")) {
 					$(this).text("*");
 					gameOver();
 				} else {
-					$(this).text("0");
+					var printNumber = getNumber($(this).attr("id"));
+					$(this).text(printNumber);
 					var id = $(this).attr("id");
 					var blank = blankSquares.indexOf(parseInt(id));
 					blankSquares.splice(blank, 1);
-					checkEmpty();
+					checkEmpty(blankSquares);
 				}
 			});
+		}
+
+
+	// on click print a mine
+
+	// game over when mine clicked
+		function gameOver() {
+			console.log("GAME OVER");
+		}
+
+	// game win when all non-mines clicked
+		function gameWin(){
+			console.log("YOU WIN");
 		}
 
 		function checkEmpty() {
@@ -93,25 +109,65 @@ $(function() {
 			}
 		}
 
-		function gameOver() {
-			console.log("GAME OVER");
-		}
-
-		function gameWin(){
-			console.log("YOU WIN");
-		}
-
-	// set mines
-
-	// on click print a mine
-
-	// game over when mine clicked
-
-	// game win when all non-mines clicked
-
 	// mine counter
 		// add logic for mine counter
 
-	}
+		function getNumber(square){
+			var mineCount = 0;
+			topArray = sideArray("a");
+			bottomArray = sideArray("b");
+			leftArray = sideArray("c");
+			rightArray = sideArray("d");
+
+			if ((square == 0) || (square == (gridWidth - 1)) || (square == ((Math.pow(gridWidth, 2) - gridWidth))) || (square == ((Math.pow(gridWidth, 2) - 1)))) {
+				//mineCount = getCornerNumber(square);
+				mineCount = 3;
+			} else if ((topArray.indexOf(parseInt(square)) != -1) || (bottomArray.indexOf(parseInt(square)) != -1) || (leftArray.indexOf(parseInt(square)) != -1) || (rightArray.indexOf(parseInt(square)) != -1)) {
+				mineCount = 2;
+			} else {
+				mineCount = 1;
+			}
+
+			return mineCount;
+		}
+
+		function getCornerNumber(square) {
+			var mineCount = 1;
+				if (square == 0) {
+					if ($("#square + 1").hasClass("mine") == true){
+						mineCount++;
+					} else if ($("#gridWidth").hasClass("mine") == true){
+						mineCount++;
+					} else if (($("#gridWidth + 1")).hasClass("mine") == true){
+						minecount++;
+					}
+				} else if (square == (gridWidth - 1)){
+					if ($("#square - 1").hasClass("mine") == true){
+						mineCount++;
+					} else if ($("#square + gridWidth - 1").hasClass("mine") == true){
+						mineCount++;
+					} else if ($("#square + gridWidth").hasClass("mine") == true){
+						mineCount++;
+					}
+				}
+			return mineCount;
+		}
+
+		function sideArray(side) {
+			var sideArray = [];
+			for (i = 1; i < (gridWidth - 1); i++) {
+				if (side == "a") {
+					sideArray.push(i);
+				} else if (side == "b") {
+					sideArray.push(i + (2*gridWidth));
+				} else if (side == "c") {
+					sideArray.push(i*gridWidth);
+				} else if (side == "d") {
+					sideArray.push((i*gridWidth)+(gridWidth - 1));
+				}
+			}
+				
+			return sideArray;
+		}
 
 });

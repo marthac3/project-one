@@ -1,14 +1,12 @@
 $(function() {
 
-	console.log("loaded");
-	var gridWidth = 4;
+	var gridWidth = 6;
 	var gridSize = Math.pow(gridWidth, 2);
 	var blankSquares = [];
 	run();
 
 	function run() {
 		createGrid();
-		generateMines();
 		clickSquare();
 		console.log();
 	}
@@ -18,19 +16,18 @@ $(function() {
 
 		function createGrid() {
 			var sideLength = 600/gridWidth;
-			console.log(sideLength);
 			
 			for (var i = 0; i < gridSize; i++) {
 				$("ul").append($("<li id='"+i+"'></li>"));
 			}
 			$("li").css({"width": sideLength, "height": sideLength});
+			return generateMines();
 		}
 
 	// set mines
 
 		function generateMines(){
 			mineNumbers = generateMineNumbers(gridWidth);
-			console.log(mineNumbers);
 
 			$("li").each(function(index, li){
 				var id = parseInt($(li).attr("id"));
@@ -42,9 +39,9 @@ $(function() {
 				}
 			});
 
-			$("li").each(function(index, li){
+			/*$("li").each(function(index, li){
 				console.log($(li).hasClass("mine"));
-			});
+			});*/
 
 		}
 
@@ -97,6 +94,7 @@ $(function() {
 		}
 
 	// game win when all non-mines clicked
+	// APPEARING EARLY FIX THIS
 		function gameWin(){
 			console.log("YOU WIN");
 		}
@@ -306,7 +304,7 @@ $(function() {
 				if (side == "a") {
 					sideArray.push(i);
 				} else if (side == "b") {
-					sideArray.push(i + (2*gridWidth));
+					sideArray.push((gridSize - 1) - i);
 				} else if (side == "c") {
 					sideArray.push(i*gridWidth);
 				} else if (side == "d") {

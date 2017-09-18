@@ -18,7 +18,7 @@ $(function() {
 			console.log(sideLength);
 			
 			for (var i = 0; i < gridSize; i++) {
-				$("ul").append($("<li value='"+i+"'></li>"));
+				$("ul").append($("<li id='"+i+"'></li>"));
 			}
 			$("li").css({"width": sideLength, "height": sideLength});
 		}
@@ -29,19 +29,40 @@ $(function() {
 		// generate number of mines based on difficulty (0-(n-1))
 
 		function generateMines(){
+			mineNumbers = generateMineNumbers();
+			console.log(mineNumbers);
+
+
+			$("li").each(function(index, li){
+				var id = parseInt($(li).attr("id"));
+				if (mineNumbers.indexOf(id) != -1) {
+					$(li).addClass("mine");
+				}
+			});
+
+			$("li").each(function(index, li){
+				console.log($(li).hasClass("mine"));
+			});
+
+		}
+
+		function generateMineNumbers(){
 			var mineNumbers = []
 			var mines = 0;
+
 			if (gridWidth == 3) {
 				mines = 2;
 			} else if (gridWidth == 4) {
 				mines = 3;
-			} else if (gridWidth == 5) {
-				mines = 5;
+			} else {
+				mines = gridWidth;
 			}
+
 			for (var i = 0; i < mines; i++) {
 				mineNumbers.push(Math.floor(Math.random()*gridSize));
 			}
-			console.log(mineNumbers);
+
+			return mineNumbers;
 		}
 
 	// set mines

@@ -172,18 +172,92 @@ $(function() {
 
 		function getSideNumber(square, top, bottom, left, right){
 			mineCount = 0;
-			console.log(top);
-			console.log(bottom);
-			console.log(left);
-			console.log(right);
-			if (top.indexOf(square) != -1){
-				mineCount = 5;
-			} else if (bottom.indexOf(square) != -1){
-				mineCount = 10;
-			}else if (left.indexOf(square) != -1){
-				mineCount = 15;
-			} else if (right.indexOf(square) != -1){
-				mineCount = 20;
+			calcSquare = parseInt(square);
+			if (top.indexOf(calcSquare) != -1){
+				// square to left
+				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// right
+				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// lower left
+				if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// below
+				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// lower right
+				if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
+					mineCount++;
+				}
+
+			} else if (bottom.indexOf(calcSquare) != -1){
+				// square to left
+				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// right
+				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// upper right
+				if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// above
+				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// upper left
+				if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+			} else if (left.indexOf(calcSquare) != -1){
+				// right
+				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// upper right
+				if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// above
+				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				}
+				// below
+				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// lower right
+				if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
+					mineCount++;
+				}
+			} else if (right.indexOf(calcSquare) != -1){
+				// square to left
+				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// above
+				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				}
+				// upper left
+				if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// lower left
+				if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
+					mineCount++;
+				} 
+				// below
+				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
+					mineCount++;
+				} 
 			}
 			return mineCount;
 		}
@@ -191,21 +265,36 @@ $(function() {
 		function getCenterNumber(square){
 			calcSquare = parseInt(square);
 			mineCount = 0;
+			// square to left
 			if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
+			} 
+			// right
+			if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
+			} 
+			// upper right
+			if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
+			} 
+			// above
+			if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
+			} 
+			// upper left
+			if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
+			} 
+			// lower left
+			if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
+			} 
+			// below
+			if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
 				mineCount++;
-			} if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
+			} 
+			// lower right
+			if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
 				mineCount++;
 			}
 			return mineCount;

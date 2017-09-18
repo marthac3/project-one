@@ -1,7 +1,7 @@
 $(function() {
 
 	console.log("loaded");
-	var gridWidth = 3;
+	var gridWidth = 4;
 	var gridSize = Math.pow(gridWidth, 2);
 	var blankSquares = [];
 	run();

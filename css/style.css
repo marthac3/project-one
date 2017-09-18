@@ -26,7 +26,6 @@ li {
     list-style-type: none;
     font-size: 6rem;
     text-align: center;
-    padding-top: 5%;
 }
 
 .gameOver {
@@ -34,6 +33,3 @@ li {
 	display: none;
 }
 
-.mine {
-	background-color: red;
-}

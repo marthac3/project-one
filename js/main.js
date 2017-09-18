@@ -6,9 +6,12 @@ $(function() {
 	function run() {
 
 		var gridWidth = 3;
-		var gridSize = Math.pow(gridWidth, 2)
+		var gridSize = Math.pow(gridWidth, 2);
+		var blankSquares = [];
 		createGrid();
 		generateMines();
+		clickSquare();
+		console.log(blankSquares);
 
 	// create 3x3 grid
 		// create grid based on difficulty selected
@@ -32,11 +35,13 @@ $(function() {
 			mineNumbers = generateMineNumbers();
 			console.log(mineNumbers);
 
-
 			$("li").each(function(index, li){
 				var id = parseInt($(li).attr("id"));
 				if (mineNumbers.indexOf(id) != -1) {
 					$(li).addClass("mine");
+				}
+				if ($(li).hasClass("mine")==false){
+					blankSquares.push(id);
 				}
 			});
 
@@ -63,6 +68,37 @@ $(function() {
 			}
 
 			return mineNumbers;
+		}
+
+		function clickSquare(){
+			$("li").click(function() {
+				if ($(this).hasClass("mine")) {
+					$(this).text("*");
+					gameOver();
+				} else {
+					$(this).text("0");
+					var id = $(this).attr("id");
+					var blank = blankSquares.indexOf(parseInt(id));
+					blankSquares.splice(blank, 1);
+					checkEmpty();
+				}
+			});
+		}
+
+		function checkEmpty() {
+			if (blankSquares.length == 0) {
+				gameWin();
+			} else {
+				return false;
+			}
+		}
+
+		function gameOver() {
+			console.log("GAME OVER");
+		}
+
+		function gameWin(){
+			console.log("YOU WIN");
 		}
 
 	// set mines

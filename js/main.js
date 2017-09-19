@@ -1,6 +1,6 @@
 $(function() {
 
-	var gridWidth = 6;
+	var gridWidth = 5;
 	var gridSize = Math.pow(gridWidth, 2);
 	var blankSquares = [];
 	run();
@@ -77,9 +77,11 @@ $(function() {
 				} else {
 					var printNumber = getNumber($(this).attr("id"));
 					$(this).text(printNumber);
-					var id = $(this).attr("id");
-					var blank = blankSquares.indexOf(parseInt(id));
-					blankSquares.splice(blank, 1);
+					var id = parseInt($(this).attr("id"));
+					var blank = blankSquares.indexOf(id);
+					if (blank != -1) {
+						blankSquares.splice(blank, 1);
+					}
 					checkEmpty(blankSquares);
 				}
 			});
@@ -132,36 +134,56 @@ $(function() {
 			calcSquare = parseInt(square);
 			var mineCount = 0;
 				if (square == 0) {
-					if ($("#" + (1)).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + gridWidth).hasClass("mine") == true){
-						mineCount++;
-					} if (($("#" + (gridWidth + 1)).hasClass("mine") == true)){
-						mineCount++;
+					// right
+					if (checkMine(calcSquare, "right") == true) {
+						mineCount++
+					} 
+				 	// below
+					if (checkMine(calcSquare, "below") == true) {
+						mineCount++
+					}
+					// lower right
+					if (checkMine(calcSquare, "down-right") == true) {
+						mineCount++
 					}
 				} else if (square == (gridWidth - 1)){
-					if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
-						mineCount++;
+					// left
+					if (checkMine(calcSquare, "left") == true) {
+						mineCount++
+					} 
+					// lower left
+					if (checkMine(calcSquare, "down-left") == true) {
+						mineCount++
+					}  
+					// below
+					if (checkMine(calcSquare, "below") == true) {
+						mineCount++
 					}
 				} else if (square == ((Math.pow(gridWidth, 2)) - gridWidth)) {
-					if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
-						mineCount++;
+					// above
+					if (checkMine(calcSquare, "above") == true) {
+						mineCount++
+					}
+					// upper right
+					if (checkMine(calcSquare, "up-right") == true) {
+						mineCount++
+					} 
+					// right
+					if (checkMine(calcSquare, "right") == true) {
+						mineCount++
 					}
 				} else if (square == ((Math.pow(gridWidth, 2) - 1))) {
-					if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-						mineCount++;
-					} if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-						mineCount++;
+					// upper left
+					if (checkMine(calcSquare, "up-left") == true) {
+						mineCount++
+					} 
+					// above
+					if (checkMine(calcSquare, "above") == true) {
+						mineCount++
+					}
+					// left
+					if (checkMine(calcSquare, "left") == true) {
+						mineCount++
 					}
 				}
 
@@ -172,90 +194,90 @@ $(function() {
 			mineCount = 0;
 			calcSquare = parseInt(square);
 			if (top.indexOf(calcSquare) != -1){
-				// square to left
-				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				// left
+				if (checkMine(calcSquare, "left") == true) {
+					mineCount++
+				}
 				// right
-				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "right") == true) {
+					mineCount++
+				}
 				// lower left
-				if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "down-left") == true) {
+					mineCount++
+				}  
 				// below
-				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "below") == true) {
+					mineCount++
+				}
 				// lower right
-				if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "down-right") == true) {
+					mineCount++
 				}
 
 			} else if (bottom.indexOf(calcSquare) != -1){
-				// square to left
-				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				// left
+				if (checkMine(calcSquare, "left") == true) {
+					mineCount++
+				}
 				// right
-				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "right") == true) {
+					mineCount++
 				} 
 				// upper right
-				if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "up-right") == true) {
+					mineCount++
 				} 
 				// above
-				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "above") == true) {
+					mineCount++
+				}
 				// upper left
-				if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "up-left") == true) {
+					mineCount++
+				}  
 			} else if (left.indexOf(calcSquare) != -1){
 				// right
-				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "right") == true) {
+					mineCount++
 				} 
 				// upper right
-				if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "up-right") == true) {
+					mineCount++
 				} 
 				// above
-				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "above") == true) {
+					mineCount++
 				}
 				// below
-				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "below") == true) {
+					mineCount++
+				}
 				// lower right
-				if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "down-right") == true) {
+					mineCount++
 				}
 			} else if (right.indexOf(calcSquare) != -1){
-				// square to left
-				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				// left
+				if (checkMine(calcSquare, "left") == true) {
+					mineCount++
+				}
 				// above
-				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "above") == true) {
+					mineCount++
 				}
 				// upper left
-				if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "up-left") == true) {
+					mineCount++
+				}  
 				// lower left
-				if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
-					mineCount++;
+				if (checkMine(calcSquare, "down-left") == true) {
+					mineCount++
 				} 
 				// below
-				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
-					mineCount++;
-				} 
+				if (checkMine(calcSquare, "below") == true) {
+					mineCount++
+				}
 			}
 			return mineCount;
 		}
@@ -263,39 +285,76 @@ $(function() {
 		function getCenterNumber(square){
 			calcSquare = parseInt(square);
 			mineCount = 0;
-			// square to left
-			if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
-				mineCount++;
-			} 
-			// right
-			if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
-				mineCount++;
-			} 
-			// upper right
-			if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
-				mineCount++;
-			} 
 			// above
-			if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
-				mineCount++;
+			if (checkMine(calcSquare, "above") == true) {
+					mineCount++
+			}
+			// left
+			if (checkMine(calcSquare, "left") == true) {
+					mineCount++
+			}
+			// right
+			if (checkMine(calcSquare, "right") == true) {
+					mineCount++
+			}
+			// upper right
+			if (checkMine(calcSquare, "up-right") == true) {
+					mineCount++
 			} 
 			// upper left
-			if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
-				mineCount++;
-			} 
+			if (checkMine(calcSquare, "up-left") == true) {
+					mineCount++
+			}  
 			// lower left
-			if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
-				mineCount++;
+			if (checkMine(calcSquare, "down-left") == true) {
+					mineCount++
 			} 
 			// below
-			if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
-				mineCount++;
-			} 
+			if (checkMine(calcSquare, "below") == true) {
+					mineCount++
+			}
 			// lower right
-			if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
-				mineCount++;
+			if (checkMine(calcSquare, "down-right") == true) {
+					mineCount++
 			}
 			return mineCount;
+		}
+
+		function checkMine(square, position) {
+			if (position == "above"){
+				if ($("#" + (calcSquare - gridWidth)).hasClass("mine") == true){
+					return true;
+				}
+			} else if (position == "below"){
+				if ($("#" + (calcSquare + gridWidth)).hasClass("mine") == true){
+					return true;
+				} 
+			} else if (position == "left"){
+				if ($("#" + (calcSquare - 1)).hasClass("mine") == true){
+					return true;
+				} 
+			} else if (position == "right"){
+				if ($("#" + (calcSquare + 1)).hasClass("mine") == true){
+					return true;
+				} 
+			} else if (position == "up-left"){
+				if ($("#" + (calcSquare - (gridWidth + 1))).hasClass("mine") == true){
+					return true;
+				} 
+			} else if (position == "up-right"){
+				if ($("#" + (calcSquare - (gridWidth - 1))).hasClass("mine") == true){
+					return true;
+				} 
+			} else if (position == "down-left"){
+				if ($("#" + (calcSquare + (gridWidth - 1))).hasClass("mine") == true){
+					return true;
+				}
+			} else if (position == "down-right"){
+				if ($("#" + (calcSquare + (gridWidth + 1))).hasClass("mine") == true){
+					return true;
+				}
+			}
+
 		}
 
 		function sideArray(side) {

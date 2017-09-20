@@ -96,7 +96,7 @@ $(function() {
 		return mineNumbers;
 	}
 	// generates arrays of squares on the edge of the grid
-	function sideArray(side) {
+	function sideArrayTwo(side) {
 		var sideArray = [];
 		for (i = 1; i < (gridWidth - 1); i++) {
 			if (side == "top") {
@@ -107,6 +107,26 @@ $(function() {
 				sideArray.push(i*gridWidth);
 			} else if (side == "right") {
 				sideArray.push((i*gridWidth)+(gridWidth - 1));
+			}
+		}
+		return sideArray;
+	}
+
+	function sideArray(side) {
+		var sideArray = [];
+		for (i = 1; i < (gridWidth - 1); i++) {
+			switch(side){
+				case "top":
+					sideArray.push(i);
+					break;
+				case "bottom":
+					sideArray.push((gridSize - 1) - i);
+					break;
+				case "left":
+					sideArray.push(i*gridWidth);
+					break;
+				case "right":
+					sideArray.push((i*gridWidth)+(gridWidth - 1));
 			}
 		}
 		return sideArray;
@@ -156,17 +176,10 @@ $(function() {
 			case 6:
 				score += 20;
 		}
-		//if (gridWidth == 4){
-		//	score += 5;
-		//} else if (gridWidth == 5){
-		//	score += 10;
-		//} else if (gridWidth == 6){
-		//	score += 20;
-		//}
-		console.log(score);
 		$("#win").toggle();
 		$("#score span").text(score);
 	}
+
 	// checks if blankSquares array is empty, if it is runs gameWin
 	function checkEmpty() {
 		if (blankSquares.length == 0) {
@@ -181,6 +194,7 @@ $(function() {
 		$("li").remove();
 		blankSquares = [];
 	}
+
 // FUNCTIONS FOR CALCULATING NUMBER PRINTED IN SQUARE (MINECOUNT)
 	// splits squares into corners, sides and centres
 	function getNumber(square){

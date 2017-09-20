@@ -149,7 +149,8 @@ $(function() {
 	}
 	// game over when mine clicked
 	function gameOver() {
-		console.log("GAME OVER");
+		var audio = $("#explosion")[0];
+		audio.play();
 		$(".mine").css("background-color","#ee2222");
 		setTimeout(function() {
 			$("#lose").fadeIn(1000);
@@ -234,6 +235,7 @@ $(function() {
 	function getSideNumber(square, top, bottom, left, right){
 		mineCount = 0;
 		calcSquare = parseInt(square);
+
 		// top side
 		if (top.indexOf(calcSquare) != -1){
 			var locations = ["below", "left", "right", "down-left", "down-right"];

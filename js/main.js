@@ -172,7 +172,6 @@ $(function() {
 		setTimeout(function() {
 			$("#win").fadeIn(100);
 		}, 500);
-		//$("#win").toggle();
 		$("#score span").text(score);
 	}
 

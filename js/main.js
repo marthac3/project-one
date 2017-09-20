@@ -7,32 +7,14 @@ $(function() {
 	var blankSquares = [];
 	run();
 
-	// FUNCTIONS FOR MENU
+// FUNCTIONS FOR MENU
 
 	function run(){
 
 		// sets difficulty
 		$("button").click(function() {
-			if ($(this).hasClass("easy")){
-				printDif = "Easy";
-				difficulty = 4;
-			} else if ($(this).hasClass("medium")){
-				printDif = "Medium";
-				difficulty = 5;
-			} else if ($(this).hasClass("hard")){
-				printDif = "Hard";
-				difficulty = 6;
-			} else if ($(this).hasClass("menuButton")){
-				reset();
-			} else if ($(this).hasClass("cont")){
-				reset();
-				if ($("#win").is(":visible")) {
-					$("#win").toggle();
-				}
-				else if ($("#lose").is(":visible")) {
-					$("#lose").toggle();
-				}
-			}
+
+			difficulty = setDifficulty($(this));
 
 			// turns off menu
 			$("#menu").toggle();
@@ -44,6 +26,31 @@ $(function() {
 			clickSquare();
 			$("#difficulty span").text(printDif);
 		});
+	}
+
+	// sets difficulty
+	function setDifficulty(square) {
+		if ($(square).hasClass("easy")){
+				printDif = "Easy";
+				difficulty = 4;
+			} else if ($(square).hasClass("medium")){
+				printDif = "Medium";
+				difficulty = 5;
+			} else if ($(square).hasClass("hard")){
+				printDif = "Hard";
+				difficulty = 6;
+			} else if ($(square).hasClass("menuButton")){
+				reset();
+			} else if ($(square).hasClass("cont")){
+				reset();
+				if ($("#win").is(":visible")) {
+					$("#win").toggle();
+				}
+				else if ($("#lose").is(":visible")) {
+					$("#lose").toggle();
+				}
+			}
+		return difficulty;
 	}
 
 // FUNCTIONS FOR BUILDING GRID
@@ -95,23 +102,8 @@ $(function() {
 		}
 		return mineNumbers;
 	}
-	// generates arrays of squares on the edge of the grid
-	function sideArrayTwo(side) {
-		var sideArray = [];
-		for (i = 1; i < (gridWidth - 1); i++) {
-			if (side == "top") {
-				sideArray.push(i);
-			} else if (side == "bottom") {
-				sideArray.push((gridSize - 1) - i);
-			} else if (side == "left") {
-				sideArray.push(i*gridWidth);
-			} else if (side == "right") {
-				sideArray.push((i*gridWidth)+(gridWidth - 1));
-			}
-		}
-		return sideArray;
-	}
 
+	// generates arrays of squares on the edge of the grid
 	function sideArray(side) {
 		var sideArray = [];
 		for (i = 1; i < (gridWidth - 1); i++) {

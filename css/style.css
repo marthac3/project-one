@@ -70,6 +70,7 @@ button {
 	float: left;
 	padding: 5px 0 5px 0;
 	margin-left: 10px;
+	/* at 1175px move above */
 }
 
 #right {
@@ -78,7 +79,8 @@ button {
 	display: inline;
 	float: right;
 	padding: 5px 0 5px 0;
-	margin-right: 10px;
+	margin: 0 10px 0 10px;
+	/* at 1175px move below */
 }
 
 .menuButton {
@@ -118,7 +120,7 @@ ul {
     list-style-type: none;
     width: 600px;
     height: 600px;
-    margin: 50px auto 0 150px;
+    margin: 50px auto 0 10%;
     border: 2px solid black;
     padding: 0;
     display: inline-block;

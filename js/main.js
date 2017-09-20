@@ -146,13 +146,23 @@ $(function() {
 	// game win when all non-mines clicked
 	function gameWin(){
 		console.log("YOU WIN");
-		if (gridWidth == 4){
-			score += 5;
-		} else if (gridWidth == 5){
-			score += 10;
-		} else if (gridWidth == 6){
-			score += 20;
+		switch (gridWidth){
+			case 4: 
+				score += 5;
+				break;
+			case 5:
+				score += 10;
+				break;
+			case 6:
+				score += 20;
 		}
+		//if (gridWidth == 4){
+		//	score += 5;
+		//} else if (gridWidth == 5){
+		//	score += 10;
+		//} else if (gridWidth == 6){
+		//	score += 20;
+		//}
 		console.log(score);
 		$("#win").toggle();
 		$("#score span").text(score);
@@ -188,42 +198,8 @@ $(function() {
 		}
 		return mineCount;
 	}
-	// calculate numbers for corners
-	function getCornerNumber(square) {
-		calcSquare = parseInt(square);
-		var mineCount = 0;
-			// top left corner
-			if (square == 0) {
-				var locations = ["below", "right", "down-right"];
-				$(locations).each(function(index, location) {
-					if (mineCalculations(calcSquare, location)) mineCount++;
-				});
-			} 
-			// top right corner
-			else if (square == (gridWidth - 1)){
-				var locations = ["below", "left", "down-left"];
-				$(locations).each(function(index, location) {
-					if (mineCalculations(calcSquare, location)) mineCount++;
-				});
-			} 
-			// bottom left corner
-			else if (square == ((Math.pow(gridWidth, 2)) - gridWidth)) {
-				var locations = ["above", "right", "up-right"];
-				$(locations).each(function(index, location) {
-					if (mineCalculations(calcSquare, location)) mineCount++;
-				});
-			} 
-			// bottom right corner
-			else if (square == ((Math.pow(gridWidth, 2) - 1))) {
-				var locations = ["above", "left", "up-left"];
-				$(locations).each(function(index, location) {
-					if (mineCalculations(calcSquare, location)) mineCount++;
-				});
-			}
-		return mineCount;
-	}
 
-	// calculate numbers for corners object
+	// calculate numbers for corners
 
 	function getCornerNumberTwo(square) {
 		calcSquare = parseInt(square);
@@ -281,12 +257,6 @@ $(function() {
 			});
 		}
 		return mineCount;
-	}
-
-	function getSideNumberTwo(square, top, bottom, left, right){
-		mineCount = 0;
-		calcSquare = parseInt(square);
-
 	}
 
 	// calculate numbers for centres

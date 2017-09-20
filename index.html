@@ -11,33 +11,42 @@
 	<!-- header -->
 	<h1>Minesweeper</h1>
 
-	<!-- left column 
+	<!-- menu with absolute position toggle hide -->
+	<div id=menu>
+		<h2>Menu</h2>
+		<button class=easy>Easy</button>
+		<button class=medium>Medium</button>
+		<button class=hard>Hard</button>
+	</div>
 
-		menu button	
+	<!-- game over/win labels -->
+	<div class=gameFinish id=win>
+		YOU WIN
+		<button class=cont>Continue</button>
+	</div>
+	<div class=gameFinish id=lose>
+		YOU LOSE
+		<button class=cont>Continue</button>
+	</div>
 
-		score
-	-->
+	<!-- left column -->
+	<div id=left>
+		<button class=menuButton>Menu</button>
+		<!--<button class=flag></button>
+		<button class=click></button>-->
+	</div>
 
 	<!-- Grid -->
 
 	<ul></ul>
 
-	<!-- right column 
+	<!-- right column -->
 
-		difficulty label	
-
-		toggles
-
-			flag
-
-			click
-	-->
-
-	<!-- menu with absolute position toggle hide -->
-	<!-- game over label -->
-	<div id=gameOver>
-		GAME OVER
+	<div id=right>
+		<div class=printBox id=difficulty><p>Difficulty</p><span></span></div>
+		<div class=printBox id=score><p>Score</p><span></span></div>
 	</div>
+	
 
 </body>
 </html>

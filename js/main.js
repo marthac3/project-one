@@ -167,7 +167,12 @@ $(function() {
 			case 6:
 				score += 20;
 		}
-		$("#win").toggle();
+		$(".mine").css("background-color","#33dd33");
+	
+		setTimeout(function() {
+			$("#win").fadeIn(100);
+		}, 500);
+		//$("#win").toggle();
 		$("#score span").text(score);
 	}
 

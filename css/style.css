@@ -134,7 +134,7 @@ button {
 }
 
 .mine {
-	background-color: #dddddd;
+	background-color: #ddddaa;
 }
 
 .purple {
@@ -143,16 +143,15 @@ button {
 
 @media screen and (max-width: 1175px) {
 
-	.printBox {
-		display: inline-block;
+	ul {
+		margin: 50px auto 0 18.3%;
 	}
 
-	#right {
+	#menu {
 		display: block;
-		width: 60%;
-		height: 10%;
-		margin: 12px 17% 0 auto;
-		float: none;
+		height: 49%;
+		width: 64%;
+		margin: 0 18.3%;
 	}
 
 	#left {
@@ -163,19 +162,12 @@ button {
 		float: none;
 	}
 
-	.menuButton {
-		height: 100%;
-	}
-
-	#menu {
+	#right {
 		display: block;
-		height: 49%;
-		width: 64%;
-		margin: 0 18.3%;
-	}
-
-	ul {
-		margin: 50px auto 0 18.3%;
+		width: 60%;
+		height: 10%;
+		margin: 12px 17% 0 auto;
+		float: none;
 	}
 
 	.gameFinish {
@@ -184,6 +176,13 @@ button {
 		width: 60%;
 	}
 
+	.menuButton {
+	height: 100%;
+	}
+
+	.printBox {
+		display: inline-block;
+	}
 }
 
 

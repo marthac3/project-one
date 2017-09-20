@@ -143,7 +143,6 @@ $(function() {
 				}
 				// checks if array of non-mine squares is empty, if true then game is won
 				checkEmpty(blankSquares);
-				console.log(blankSquares);
 			}
 		});
 	}
@@ -158,7 +157,6 @@ $(function() {
 	}
 	// game win when all non-mines clicked
 	function gameWin(){
-		console.log("YOU WIN");
 		switch (gridWidth){
 			case 4: 
 				score += 5;

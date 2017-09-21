@@ -54,6 +54,8 @@ The colour scheme mostly uses grey and purple, with white for emphasis (the grid
 
 An explosion noise plays when a mine is clicked.
 
+I added media queries to the styling so that on mobile, the menu button appears at the top, then the menu/grid, then the difficulty and score boxes at the bottom
+
 >**Part 4 - DRYing Code**
 
 The first major change was taking all calculations from the various getXNumber() functions and putting them into one shorter function, with the previous functions calling them by looping through an array of the positions of the squares that need checking for mines.

@@ -45,5 +45,24 @@ Based on my wireframes, I created two sidebars, one on either side of the grid.
 Put all calculations into a shorter funtion
 
 ### Issues
+
+I had two major issues when creating this game, both related to faulty calculations printing incorrect numbers on clicked squares.
+
+>**Issue 1 - Adding anything to the ID of the square not working**
+
+I noticed all mines on the line above or to the left of the clicked square were being counted, but any below or to the right were not. I realised that any calculation adding the square's ID to another number were the ones that were not functioning.
+
+The problem was being caused by the square's ID being a string.
+
+I added a parseInt() to each function using the square's ID for calculations in order to be able to use it as an int, which fixed the problem.
+
+>**Issue 2 - Mines below the third row not being counted**
+
+I noticed that while most squares were showing the correct number, a small number of them were showing a number one or two lower than they should. After checking many grids at various sizes, I realised that all the incorrect numbers were on the third row, and any mines not being counted were on the row below them.
+
+The problem was a faulty calculation in sideArray mistaking all squares on the third row as being on the bottom row. I had written the calculation to find squares on the bottom row based on a 3x3 grid rather than to be universal.
+
+I changed the calculation from (i + (2 * gridWidth)) to ((gridSize - 1) - i).
+
 ## Running
 ## Site

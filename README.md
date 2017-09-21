@@ -32,7 +32,11 @@ I then worked out the calculations to find the indexes of all the squares adjace
 
 >**Part 2 - Functioning Game**
 
-The first step in getting the game to function as a game of minesweeper was to create the grid.
+The first step in getting the game to function as a game of minesweeper was to create the grid. It is contained as being 600px x 600px but can have any number of squares across. The ul is created in the HTML but the li elements are generated in the Javascript using the variable 'gridWidth'. By changing 'gridWidth', the grid can have a different number of squares.
+
+Then squares are chosen to be mines. This is done by setting the number of mines based on the size of the grid. Then random numbers between 0 and the index of the final square are chosen, and pushed to an array. These random numbers can be repeats of each other, meaning as few as 1 mine could be on the grid, but I left this as it was as it adds an extra random element to the game.
+
+These chosen squares then had to be assigned the class of 'mine'. The generateMines() function loops through all the li elements and if their index matches a number in the array of mine numbers, it is assigned the class of 'mine'. If it is not a mine it's index is pushed to the array blankSquares[], used to check whether a player has won the game.
 
 >**Part 3 - Visuals**
 
@@ -48,13 +52,13 @@ Put all calculations into a shorter funtion
 
 I had two major issues when creating this game, both related to faulty calculations printing incorrect numbers on clicked squares.
 
->**Issue 1 - Adding anything to the ID of the square not working**
+>**Issue 1 - Adding anything to the index of the square not working**
 
-I noticed all mines on the line above or to the left of the clicked square were being counted, but any below or to the right were not. I realised that any calculation adding the square's ID to another number were the ones that were not functioning.
+I noticed all mines on the line above or to the left of the clicked square were being counted, but any below or to the right were not. I realised that any calculation adding the square's index to another number were the ones that were not functioning.
 
-The problem was being caused by the square's ID being a string.
+The problem was being caused by the square's index being a string.
 
-I added a parseInt() to each function using the square's ID for calculations in order to be able to use it as an int, which fixed the problem.
+I added a parseInt() to each function using the square's index for calculations in order to be able to use it as an int, which fixed the problem.
 
 >**Issue 2 - Mines below the third row not being counted**
 

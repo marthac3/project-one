@@ -79,7 +79,7 @@ $(function() {
 			if (mineNumbers.indexOf(id) != -1) {
 				$(li).addClass("mine");
 			}
-			if ($(li).hasClass("mine") == false){
+			else {
 				blankSquares.push(id);
 			}
 		});

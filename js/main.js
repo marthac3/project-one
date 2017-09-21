@@ -89,10 +89,10 @@ $(function() {
 		var mineNumbers = []
 		var mines = 0;
 		// decides number of mines
-		if (gridWidth == 3) {
+		if (gridWidth == 4) {
 			mines = 2;
-		} else if (gridWidth == 4) {
-			mines = 3;
+		} else if (gridWidth == 5) {
+			mines = 4;
 		} else {
 			mines = gridWidth;
 		}
@@ -150,7 +150,7 @@ $(function() {
 	function gameOver() {
 		var audio = $("#explosion")[0];
 		audio.play();
-		$(".mine").css("background-color","#ee2222");
+		$(".mine").css("background-color","#ee3737");
 		setTimeout(function() {
 			$("#lose").fadeIn(1000);
 		}, 1000);

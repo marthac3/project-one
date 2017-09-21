@@ -51,6 +51,10 @@ button {
 	text-align: center;
 }
 
+span {
+	color: #ffffff;
+}
+
 /* MENU CONTAINER */
 #menu {
 	height: 80%;
@@ -98,7 +102,7 @@ button {
 }
 
 .hard {
-	background-color: #ee4141;
+	background-color: #ee3737;
 }
 
 /* Sidebar containers */
@@ -144,7 +148,7 @@ button {
 
 /* Mines on grid */
 .mine {
-	background-color: #ddddaa;
+	background-color: #dddddd;
 }
 
 /* For purple divs */

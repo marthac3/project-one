@@ -56,7 +56,15 @@ An explosion noise plays when a mine is clicked.
 
 >**Part 4 - DRYing Code**
 
-Put all calculations into a shorter funtion
+The first major change was taking all calculations from the various getXNumber() functions and putting them into one shorter function, with the previous functions calling them by looping through an array of the positions of the squares that need checking for mines.
+
+This was further shortened into an object.
+
+getCornerNumber() was condensced by using multi-dimensional arrays and a nested for loop.
+
+setDifficulty() was taken out of the run() function.
+
+Two if/else statements were changed to switch statements, however this was not possible for all of them.
 
 Many functions involved resetting the game by removing all the li elements, setting the difficulty to 0 and emptying the blankSquares[] array. These were all taken out an put into one function reset() that they could call.
 
@@ -81,6 +89,10 @@ The problem was a faulty calculation in sideArray mistaking all squares on the t
 I changed the calculation from (i + (2 * gridWidth)) to ((gridSize - 1) - i).
 
 ### Future Improvements
+
+The option to put flags on squares that the player knows are mines is an important part of minesweeper and I would have liked to implement it into this version.
+
+I considered using ECMAScript6 but there was not enough time.
 
 ## Running
 ## Site
